@@ -50,7 +50,7 @@ fun ImagenTexto(imagen: Painter, description: String, modifier: Modifier = Modif
         Row (Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
             Text(description)
             Icon(
-                if (iconPulsado){ //Si el icono ha sido pulsado cambia el estado de la variable iconPulsado
+                if (iconPulsado){ //Si el icono ha sido pulsado cambia el estado de la variable iconPulsado para ahcer aparecer un icono u otro.
                     Icons.Default.Favorite
                 } else {
                     Icons.Default.FavoriteBorder

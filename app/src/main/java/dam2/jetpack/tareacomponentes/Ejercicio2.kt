@@ -51,7 +51,7 @@ fun IntroducirTexto(texto: String, cambiarTexto: (String) -> Unit) {
     TextField(
         texto, onValueChange = cambiarTexto,
         modifier = Modifier.border(
-            width = 5.dp, color = if (texto.isEmpty()){
+            width = 5.dp, color = if (texto.isEmpty()){ // si el texto está vacío estará en rojo el borde para indicar que falta rellenarlo.
                 Color.Red
             } else {
                 Color.DarkGray

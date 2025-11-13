@@ -26,7 +26,7 @@ fun Ejercicio5(){
         var comenzar by rememberSaveable { mutableStateOf(false) }
         if (comenzar){
             CircularProgressIndicator()
-            LaunchedEffect(Unit) {
+            LaunchedEffect(Unit) { //Lanzamos una corrutina del sistema para hacer que parezca que está tardando en cargar.
                 delay(3000)
                 finalizado = true
                 comenzar = false
