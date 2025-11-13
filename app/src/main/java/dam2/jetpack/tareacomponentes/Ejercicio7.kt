@@ -50,7 +50,7 @@ fun Ejercicio7() {
         val seleccionados = aficiones.filterValues { it }.keys //Filtramos aquellas claves del diccionario que su valor sea true
         Text(
             text = if (seleccionados.isEmpty()) "Ninguna afición seleccionada"
-            else "Seleccionadas: ${seleccionados.joinToString(", ")}"
+            else "Seleccionadas: ${seleccionados.joinToString(", ")}" // Le hacemos jointoStirng para que aparezca cada afición separados por ,.
         )
     }
 }

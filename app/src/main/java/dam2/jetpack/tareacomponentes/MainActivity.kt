@@ -35,7 +35,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun InicioApp() {
     val navigation = rememberNavController()
-    val drawerState = rememberDrawerState(DrawerValue.Closed)
+    val drawerState = rememberDrawerState(DrawerValue.Closed) // Estado del menú lateral (abierto o cerrado)
     val scope = rememberCoroutineScope()
 
     val ejercicios = listOf(
@@ -67,8 +67,9 @@ fun InicioApp() {
                             label = { Text(ejercicio) },
                             selected = false,
                             onClick = {
-                                navigation.navigate(ejercicio)
-                                scope.launch { drawerState.close() }
+                                navigation.navigate(ejercicio) // Navega a la tarea seleccionada.
+
+                                scope.launch { drawerState.close() } // Cierra el menú en pulsar en alguna tarea.
                             }
                         )
                     }

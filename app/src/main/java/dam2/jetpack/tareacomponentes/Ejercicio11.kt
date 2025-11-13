@@ -44,7 +44,7 @@ fun Ejercicio11(){
                             color = Color.Blue,
                             modifier = Modifier.clickable(onClick = {
                                 verImagen = true
-                                verCuadroDialogo = false
+                                verCuadroDialogo = false //Cerramos el diálogo cuando haga click
                             })
                             )
                         Text(

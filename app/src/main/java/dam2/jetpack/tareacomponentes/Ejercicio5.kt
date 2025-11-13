@@ -31,7 +31,7 @@ fun Ejercicio5(){
                 finalizado = true
                 comenzar = false
             }
-        }else if (finalizado){
+        }else if (finalizado){ //
             Text("Carga completada")
         }
 
