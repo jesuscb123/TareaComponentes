@@ -17,6 +17,7 @@ import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.Checkbox
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
@@ -47,6 +48,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import dam2.jetpack.ejercicio12.ui.theme.Ejercicio12Theme
+import kotlinx.coroutines.delay
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -114,8 +116,9 @@ fun Formulario(navController: NavHostController){
             "Carnaval" to false
         )
     }
-    var mostrarDetalles by rememberSaveable { mutableStateOf(false) }
     var mostrarDialogo by rememberSaveable { mutableStateOf(false) }
+    var comenzar by rememberSaveable { mutableStateOf(false) }
+    var finalizar by rememberSaveable { mutableStateOf(false) }
 
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -138,13 +141,16 @@ fun Formulario(navController: NavHostController){
             valueRange = 0f..99f,
         )
         HorizontalDivider()
+
         Text("Indica los temas que más te interesan")
         Preferencias(preferencias)
         HorizontalDivider()
         CrearRadioButton(listaLenguajes, lenguajeSelect){
             lenguajeSelect = it
         }
+
         HorizontalDivider()
+
         Button(
             onClick = { mostrarDialogo = true },
             enabled = todoCorrecto(nombre, correo, lenguajeSelect)
@@ -153,22 +159,40 @@ fun Formulario(navController: NavHostController){
         if (mostrarDialogo) {
             CrearAlertDialog(
                 confirmar = {
-                    navController.currentBackStackEntry?.savedStateHandle?.set(
-                        "datosFormulario", DatosFormulario(
-                            nombre,
-                            correo,
-                            slider.toInt(),
-                            lenguajeSelect,
-                            preferencias
-                        )
-                    )
-                    navController.navigate("detalles")
+                        comenzar = true
+
                 },
                 cancelar = {
                     mostrarDialogo = false
                 }
             )
         }
+
+            if (comenzar) {
+                CircularProgressIndicator()
+                LaunchedEffect(Unit) {
+                    mostrarDialogo = false
+                    delay(3000)
+                    comenzar = false
+                    finalizar = true
+                }
+            }
+
+            if (finalizar){
+                navController.currentBackStackEntry?.savedStateHandle?.set(
+                    "datosFormulario",
+                    DatosFormulario(
+                        nombre,
+                        correo,
+                        slider.toInt(),
+                        lenguajeSelect,
+                        preferencias
+                    )
+                )
+                navController.navigate("detalles")
+                finalizar = false
+            }
+
     }
 }
 
